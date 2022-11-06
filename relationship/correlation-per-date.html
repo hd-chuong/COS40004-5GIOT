@@ -30,7 +30,7 @@
             <option value="Upload size (MBytes)">Upload size (MBytes)</option>
             <option value="Download size (MBytes)">Download size (MBytes)</option>
 
-            <option value="Upload throughput (MBytes)">Upload throughput (MBits/s)</option>
+            <option value="Upload throughput (MBits)">Upload throughput (MBits/s)</option>
             <option value="Response time from CloudflareDNS (ms)">Responding to CloudFlare DNS (ms)</option>
             <option value="Response time from GoogleDNS (ms)">Responding to Google DNS (ms)</option>
             <option value="Response time from OptusDNS (ms)">Responding to Optus DNS (ms)</option>
@@ -108,6 +108,7 @@
         // Read the data and compute summary statistics for each specie
         d3.csv("date_and_weather.csv", function(rawData) {
             const data = rawData.map(processRow).filter(row => row[performanceAttribute] >= 0);
+            console.log(data);
 
             const dateSet = new Set(data.map(function(row) { return row.Date}));
             const dates = Array.from(dateSet.values());
