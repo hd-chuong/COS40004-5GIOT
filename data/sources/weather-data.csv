@@ -1,0 +1,62 @@
+﻿Month,Date,Rainfall (mm),Rainfall rank,9am cloud amount (oktas),Cloud Rank,3pm cloud amount (oktas),Cloud Rank,Sunshine (hours),Direction of maximum wind gust,Speed of maximum wind gust (km/h),Time of maximum wind gust,Wind Rank,Minimum temperature (°C),Maximum temperature (°C),Numerical data - Rain,Numerical data - Cloud,Numerical data - Wind
+June,1/6/2022,4.4,Medium rainfall,7,Cloudly,7,Cloudly,0.6,W,61,7:22,Heavy wind,4.4,11.4,2,2,2
+June,2/6/2022,3.2,Medium rainfall,6,Cloudly,8,Cloudly,4.3,WNW,24,0:02,Light wind,3.3,12.2,2,2,1
+June,3/6/2022,0,no rainfall,7,Cloudly,5,Partial cloud,3.6,N,63,22:42,Heavy wind,3,12.1,0,1,2
+June,4/6/2022,0,no rainfall,2,No Cloud (Sunny),6,Cloudly,5.8,N,56,21:38,Heavy wind,6.5,14.8,0,2,2
+June,5/6/2022,0.2,light rainfall,7,Cloudly,8,Cloudly,1.9,N,72,12:07,Heavy wind,9.1,13.8,1,2,2
+June,6/6/2022,0.8,light rainfall,1,No Cloud (Sunny),7,Cloudly,6.2,WSW,63,13:48,Heavy wind,6.3,13.2,1,2,2
+June,7/6/2022,2.2,Medium rainfall,7,Cloudly,6,Cloudly,5.1,WSW,56,15:52,Heavy wind,3.8,11.8,2,2,2
+June,8/6/2022,0.2,light rainfall,7,Cloudly,6,Cloudly,2.5,WSW,44,12:33,Heavy wind,6.2,12,1,2,2
+June,9/6/2022,0.2,light rainfall,7,Cloudly,7,Cloudly,2,SW,50,14:33,Heavy wind,7.7,13.3,1,2,2
+June,10/6/2022,0.2,light rainfall,4,Partial cloud,7,Cloudly,3.6,WSW,56,14:17,Heavy wind,7.4,14.4,1,2,2
+June,11/6/2022,1,light rainfall,7,Cloudly,7,Cloudly,0.4,WSW,54,14:31,Heavy wind,7.4,12.3,1,2,2
+June,12/6/2022,0.2,light rainfall,6,Cloudly,7,Cloudly,2.1,SW,46,11:37,Heavy wind,8.8,12.6,1,2,2
+June,13/6/2022,2.8,Medium rainfall,7,Cloudly,6,Cloudly,2.6,N,26,22:46,Heavy wind,7.7,12.9,2,2,2
+June,14/6/2022,0,no rainfall,5,Partial cloud,7,Cloudly,4.3,NNE,78,21:48,Heavy wind,5.1,12.9,0,2,2
+June,15/6/2022,0,no rainfall,7,Cloudly,7,Cloudly,2.1,NNE,81,1:11,Heavy wind,8.6,12.9,0,2,2
+June,16/6/2022,0.2,light rainfall,7,Cloudly,8,Cloudly,0.2,WSW,37,9:58,Heavy wind,8.1,14,1,2,2
+June,17/6/2022,9.2,Medium rainfall,7,Cloudly,6,Cloudly,2.7,SW,24,2:33,Light wind,9.5,13.5,2,2,1
+June,18/6/2022,0,no rainfall,7,Cloudly,2,No Cloud (Sunny),5.1,N,20,0:12,Light wind,5.6,16,0,0,1
+June,19/6/2022,0,no rainfall,6,Cloudly,7,Cloudly,5,NNE,48,23:51,Heavy wind,2.8,14.1,0,2,2
+June,20/6/2022,0,no rainfall,6,Cloudly,4,Partial cloud,4.2,N,63,16:01,Heavy wind,7.8,17,0,1,2
+June,21/6/2022,2.2,Medium rainfall,1,No Cloud (Sunny),4,Partial cloud,7.1,WSW,50,14:33,Heavy wind,9,15,2,1,2
+June,22/6/2022,0.4,light rainfall,3,Partial cloud,7,Cloudly,1.8,NNE,48,22:11,Heavy wind,6.4,15.3,1,2,2
+June,23/6/2022,0,no rainfall,7,Cloudly,7,Cloudly,0.7,NNE,57,19:30,Heavy wind,9.2,15.6,0,2,2
+June,24/6/2022,1.2,light rainfall,7,Cloudly,6,Cloudly,4,NNE,57,0:10,Heavy wind,10.6,15.7,1,2,2
+June,25/6/2022,0,no rainfall,1,No Cloud (Sunny),2,No Cloud (Sunny),8.9,NNW,48,12:21,Heavy wind,7.2,15.2,0,0,2
+June,26/6/2022,0,no rainfall,6,Cloudly,7,Cloudly,1.1,W,41,16:38,Heavy wind,8.4,13.2,0,2,2
+June,27/6/2022,2,Medium rainfall,5,Partial cloud,7,Cloudly,2.6,SW,35,11:19,Heavy wind,4.4,12.6,2,2,2
+June,28/6/2022,0,no rainfall,7,Cloudly,3,Partial cloud,4.4,NNE,52,19:23,Heavy wind,4.2,12.9,0,1,2
+June,29/6/2022,0,no rainfall,7,Cloudly,7,Cloudly,0,N,50,22:44,Heavy wind,5.3,9.9,0,2,2
+June,30/6/2022,0,no rainfall,6,Cloudly,5,Partial cloud,6.6,NNE,28,4:12,Light wind,2.1,14.3,0,1,1
+July,1/7/2022,0,no rainfall,5,Partial cloud,6,Cloudly,0.4,S,33,15:45,Heavy wind,4.2,11.7,0,2,2
+July,2/7/2022,0,no rainfall,7,Cloudly,4,Partial cloud,4.3,SSW,33,14:18,Heavy wind,5.1,11.9,0,1,2
+July,3/7/2022,0,no rainfall,7,Cloudly,7,Cloudly,4.8,SSE,41,13:37,Heavy wind,3.8,12.1,0,2,2
+July,4/7/2022,0,no rainfall,1,No Cloud (Sunny),1,No Cloud (Sunny),7.9,SSE,35,12:43,Heavy wind,3.2,12.7,0,0,2
+July,5/7/2022,0.4,light rainfall,7,Cloudly,3,Partial cloud,7,SSE,33,12:11,Heavy wind,6.7,13.6,1,1,2
+July,6/7/2022,0.2,light rainfall,0,No Cloud (Sunny),1,No Cloud (Sunny),9,N,24,1:59,Light wind,-0.5,16.9,1,0,1
+July,7/7/2022,0,no rainfall,7,Cloudly,7,Cloudly,6.1,SW,41,12:57,Heavy wind,3.2,14.1,0,2,2
+July,8/7/2022,0.6,light rainfall,7,Cloudly,7,Cloudly,1.1,SSW,48,15:58,Heavy wind,7.5,11.7,1,2,2
+July,9/7/2022,12.6,Heavy rainfall,5,Partial cloud,7,Cloudly,3.4,SW,30,12:04,Light wind,5.9,12.7,3,2,1
+July,10/7/2022,0.2,light rainfall,7,Cloudly,1,No Cloud (Sunny),6.7,NNE,28,14:03,Light wind,2.3,15.6,1,0,1
+July,11/7/2022,0,no rainfall,7,Cloudly,6,Cloudly,5.4,NNE,52,5:51,Heavy wind,4.5,13.4,0,2,2
+July,12/7/2022,1.8,light rainfall,7,Cloudly,7,Cloudly,0.1,SSW,26,13:39,Light wind,5.1,10.1,1,2,1
+July,13/7/2022,4.2,Medium rainfall,5,Partial cloud,4,Partial cloud,4.4,SW,44,13:51,Heavy wind,4.6,12.4,2,1,2
+July,14/7/2022,1,light rainfall,7,Cloudly,7,Cloudly,1.1,SW,22,11:13,Light wind,4.7,11.7,1,2,1
+July,15/7/2022,0,no rainfall,7,Cloudly,7,Cloudly,3.1,N,57,23:17,Heavy wind,5.9,14.3,0,2,2
+July,16/7/2022,0,no rainfall,7,Cloudly,7,Cloudly,2.4,NNE,83,16:03,Heavy wind,7.3,12.5,0,2,2
+July,17/7/2022,0,no rainfall,6,Cloudly,7,Cloudly,4.7,N,57,0:38,Heavy wind,7.3,16.7,0,2,2
+July,18/7/2022,0.4,light rainfall,7,Cloudly,6,Cloudly,3.1,SW,48,14:40,Heavy wind,4.3,10.6,1,2,2
+July,19/7/2022,2,Medium rainfall,1,No Cloud (Sunny),1,No Cloud (Sunny),3.1,ESE,28,12:10,Light wind,2.5,11.1,2,0,1
+July,20/7/2022,0.2,light rainfall,0,No Cloud (Sunny),1,No Cloud (Sunny),9,N,19,7:42,Light wind,-1.5,12.4,1,0,1
+July,21/7/2022,0,no rainfall,4,Partial cloud,1,No Cloud (Sunny),9,N,26,4:46,Light wind,-0.2,15.5,0,0,1
+July,22/7/2022,0,no rainfall,1,No Cloud (Sunny),7,Cloudly,6.4,NNE,48,12:26,Heavy wind,1.5,17.6,0,2,2
+July,23/7/2022,0.2,light rainfall,8,Cloudly,7,Cloudly,0,NNE,44,14:08,Heavy wind,5.8,13.4,1,2,2
+July,24/7/2022,6,Medium rainfall,1,No Cloud (Sunny),1,No Cloud (Sunny),9.3,N,48,5:41,Heavy wind,9.7,17.4,2,0,2
+July,25/7/2022,0,no rainfall,7,Cloudly,7,Cloudly,2,NNE,57,15:05,Heavy wind,6.9,13.9,0,2,2
+July,26/7/2022,4.6,Medium rainfall,6,Cloudly,7,Cloudly,1.9,WSW,72,15:21,Heavy wind,6,12.3,2,2,2
+July,27/7/2022,1.8,light rainfall,6,Cloudly,7,Cloudly,4.7,W,44,14:22,Heavy wind,6.6,15.6,1,2,2
+July,28/7/2022,0.8,light rainfall,6,Cloudly,7,Cloudly,5.3,SW,41,16:36,Heavy wind,6.6,13.2,1,2,2
+July,29/7/2022,1.2,light rainfall,4,Partial cloud,3,Partial cloud,8,SSW,28,13:34,Light wind,4.2,12.3,1,1,1
+July,30/7/2022,0,no rainfall,2,No Cloud (Sunny),1,No Cloud (Sunny),9.1,NNE,56,16:26,Heavy wind,-1.1,12.5,0,0,2
+July,31/7/2022,0,no rainfall,7,Cloudly,7,Cloudly,1.4,NNE,72,10:32,Heavy wind,5.8,13.9,0,2,2
