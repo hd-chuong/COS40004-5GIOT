@@ -106,10 +106,8 @@
 
         // Read the data and compute summary statistics for each specie
         d3.csv("date_and_weather.csv", function(rawData) {
-
             const data = rawData.map(processRow).filter(row => row[performanceAttribute] >= 0);
 
-            
             const dateSet = new Set(data.map(function(row) { return row.Date}));
             const dates = Array.from(dateSet.values());
             const dateMin = Math.min(...dates);

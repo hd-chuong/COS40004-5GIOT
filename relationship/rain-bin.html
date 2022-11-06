@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" 
+    integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdn.korzh.com/metroui/v4.5.1/css/metro-all.min.css">
+<script src="https://cdn.korzh.com/metroui/v4.5.1/js/metro.min.js"></script>
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<!-- Plugin for color scale -->
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+<style>
+    #main {
+        width: 100%;
+    }
+
+    #visZone {
+        margin: 10px;
+    }
+</style>
+<body>
+    <div>
+        <label for="cars">Choose a performance parameter</label>
+        <select name="performance-parameter" id="performance-parameter">
+            <option value="Bitrate">Upload speed (MBits/s)</option>
+            <option value="Bitrate-RX">Download speed (MBits/s)</option>
+            <option value="Transfer size">Upload size (MBytes)</option>
+            <option value="Transfer size-RX">Download size (MBytes)</option>
+
+            <option value="send_data">Upload throughput (MBits/s)</option>
+            <option value="svr1">Responding to CloudFlare DNS (ms)</option>
+            <option value="svr2">Responding to Google DNS (ms)</option>
+            <option value="svr3">Responding to Optus DNS (ms)</option>
+            <option value="svr4">Responding to AWS DNS (ms)</option>
+        </select>
+    </div>
+    <div>
+        <label for="cars">Choose a factor</label>
+        <select name="factor-parameter" id="factor-parameter">
+            <option value="Rain Rate" >Rain</option>
+            <option value="speed" disabled>Speed</option>
+            
+            <option value="Cloud Rate" disabled>Cloud</option>
+            <option value="Wind Rate" disabled>Wind</option>
+        </select>
+    </div>
+
+<div id="main">
+    <!-- Create a div where the graph will take place -->
+    <div id="visZone"></div>
+</div>
+<script src="./js/processing.js"></script>
+<script src="./js/tooltip.js"></script>
+<script src="./js/util.js"></script>
+<script>
+    document.querySelector('#performance-parameter').addEventListener('change', function(event) {
+        const performanceAttribute = event.target.value;
+        const factorAttribute = document.querySelector("#factor-parameter").value;
+        drawChart({performanceAttribute, factorAttribute});
+    });
+
+    document.querySelector('#factor-parameter').addEventListener('change', function(event) {
+        const performanceAttribute = document.querySelector("#performance-parameter").value;
+        const factorAttribute = event.target.value;
+        drawChart({performanceAttribute, factorAttribute});
+    });
+
+    const factorLowerbound = 4;
+    const factorUpperbound = 40;
+
+    const chartWidth = 800;
+    const chartHeight = 600;
+    // set the dimensions and margins of the graph
+    var margin = {top: 10, right: 30, bottom: 100, left: 40},
+        width = chartWidth - margin.left - margin.right,
+        height = chartHeight - margin.top - margin.bottom;
+    
+    drawChart({performanceAttribute: "Bitrate", factorAttribute: "speed"});
+
+    function drawChart({performanceAttribute, factorAttribute, factorMin, factorMax}) {
+        d3.select("#visZone").selectAll("svg").remove();
+        d3.select("#visZone").selectAll(".tooltip").remove();
+        d3.select("#visZone").selectAll("#legend").remove();
+
+        // append the svg object to the body of the page
+        var svg = d3.select("#visZone")
+        .append("svg")
+        .attr("id", "chart")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    
+        var tooltip = d3.select("#visZone")
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("font-size", "12px");
+
+        var boxTooltip = d3.select("#visZone")
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("font-size", "12px");
+
+        // Read the data and compute summary statistics for each specie
+        d3.csv("date_and_weather.csv", function(rawData) {
+            const data = rawData.map(processRow).filter(row => row[performanceAttribute] >= 0);
+
+            const rainBinRange = [0, 1, 2];
+
+            const performanceRange = data.map(function(row) { return row[performanceAttribute]});
+            const factorRange = data.map(function(row) {return row[factorAttribute]});
+
+            const factorMin = Math.min(...factorRange);
+            const factorMax = Math.max(...factorRange);
+
+            const yMin = Math.min(...performanceRange);
+            const yMax = Math.max(...performanceRange);
+            const yRangeScale = [ yMin, yMax ];
+
+            // Compute quartiles, median, inter quantile range min and max --> these info are then used to draw the box.
+            var sumstat = d3.nest() // nest function allows to group the calculation per level of a factor
+            .key(function(d) { return d["Rain Rate"]})
+            .rollup(function(d) {
+                const q1 = d3.quantile(d.map(function(g) { return g[performanceAttribute];}).sort(d3.ascending),.25);
+                const median = d3.quantile(d.map(function(g) { return g[performanceAttribute];}).sort(d3.ascending),.5);
+                const q3 = d3.quantile(d.map(function(g) { return g[performanceAttribute];}).sort(d3.ascending),.75);
+                const interQuantileRange = q3 - q1;
+                const min = Math.min(...d.map(d => d[performanceAttribute]));
+                const max = Math.max(...d.map(d => d[performanceAttribute]));
+                return {
+                    q1: q1,
+                    median: median,
+                    q3: q3,
+                    interQuantileRange: interQuantileRange,
+                    min: min,
+                    max: max
+                };
+            })
+            .entries(data);
+
+            // Show the X scale
+            var x = d3.scaleBand()
+            .range([ 0, width ])
+            .domain(rainBinRange)
+            .paddingInner(1)
+            .paddingOuter(.5);
+
+            svg.append("g")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x));
+
+            // Show the Y scale
+            var y = d3.scaleLinear()
+            .domain(yRangeScale)
+            .range([height, 0]);
+            svg.append("g").call(d3.axisLeft(y));
+
+            // Color scale
+            var myColor = d3.scaleSequential()
+                .interpolator(d3.interpolateBlues)
+                .domain([0, 2])
+            
+            svg
+            .selectAll("baselines")
+            .data(d3.axisLeft(y).scale().ticks())
+            .enter()
+            .append("line")
+            .attr("x1", function(d) {return 0;})
+            .attr("x2", function(d) {return chartWidth;})
+            .attr("y1", function(d) {return y(d);})
+            .attr("y2", function(d) {return y(d);})
+            .attr("stroke", "black")
+            .style("width", 5)
+            .style("opacity", 0.1);
+
+            // Add individual points with jitter
+            svg
+            .selectAll("indPoints")
+            .data(data)
+            .enter()
+            .append("circle")
+            .attr("cx", function(d, i) {
+                return x(d["Rain Rate"]) + (Math.random() - 0.5) * 40;
+            })
+            .attr("cy", function(d){return(y(d[performanceAttribute]))})
+            .attr("fill", function(d){return myColor(+1.5);})
+            .attr("r", 3)
+            .attr("opacity", (d) => filter(d[factorAttribute], factorMin, factorMax) ? 1 : 0)
+            .on("mouseover", (d) => mouseover(tooltip, getPointTooltipHtml, d))
+            .on("mousemove", (d) => mousemove(tooltip, d))
+            .on("mouseleave", (d) => mouseleave(tooltip, d));
+
+            // Show the main vertical line
+            svg
+            .selectAll("vertLines")
+            .data(sumstat)
+            .enter()
+            .append("line")
+            .attr("x1", function(d){return(x(d.key))})
+            .attr("x2", function(d){return(x(d.key))})
+            .attr("y1", function(d){return(y(d.value.min))})
+            .attr("y2", function(d){return(y(d.value.max))})
+            .attr("stroke", "black")
+            .style("width", 40);
+            
+            // rectangle for the main box
+            var boxWidth = 50
+            svg
+            .selectAll("boxes")
+            .data(sumstat)
+            .enter()
+            .append("rect")
+            .attr("x", function(d){return(x(d.key)-boxWidth/2)})
+            .attr("y", function(d){return(y(d.value.q3))})
+            .attr("height", function(d){return(y(d.value.q1)-y(d.value.q3))})
+            .attr("width", boxWidth )
+            .attr("stroke", "black")
+            .attr("stroke-width", 2)
+            .attr("fill", "yellow")
+            .style("opacity", 0.8)
+            .on("mouseover", (d) => mouseover(boxTooltip, getBoxTooltipHtml, d.value))
+            .on("mousemove", (d) => mousemove(boxTooltip, d))
+            .on("mouseleave", (d) => mouseleave(boxTooltip, d));
+            
+            // Show the median
+            svg
+            .selectAll("medianLines")
+            .data(sumstat)
+            .enter()
+            .append("line")
+            .attr("x1", function(d){return x(d.key)-boxWidth/2; })
+            .attr("x2", function(d){return x(d.key)+boxWidth/2; })
+            .attr("y1", function(d){return y(d.value.median)})
+            .attr("y2", function(d){return y(d.value.median)})
+            .attr("stroke", "black")
+            .style("width", 80);
+
+            // Show the min
+            svg
+            .selectAll("lowerBoundaries")
+            .data(sumstat)
+            .enter()
+            .append("line")
+            .attr("x1", function(d){return x(d.key) - boxWidth/6})
+            .attr("x2", function(d){return x(d.key) + boxWidth/6})
+            .attr("y1", function(d){return y(d.value.min)})
+            .attr("y2", function(d){return y(d.value.min)})
+            .attr("stroke", "black")
+            .style("width", 40);
+
+            svg
+            .selectAll("upperBoundaries")
+            .data(sumstat)
+            .enter()
+            .append("line")
+            .attr("x1", function(d){return x(d.key) - boxWidth/6})
+            .attr("x2", function(d){return x(d.key) + boxWidth/6})
+            .attr("y1", function(d){return y(d.value.max)})
+            .attr("y2", function(d){return y(d.value.max)})
+            .attr("stroke", "black")
+            .style("width", 40);
+
+            // text label for the y axis
+            svg.append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 0 - margin.left)
+                .attr("x",0 - (height / 2))
+                .attr("dy", "1em")
+                .style("text-anchor", "middle")
+                .text(performanceAttribute);
+
+            // text label for the x axis
+            svg.append("text")             
+                .attr("transform",
+                        "translate(" + (width/2) + " ," + 
+                                    (height + margin.top + 20) + ")")
+                .style("text-anchor", "middle")
+                .text("Rain level");
+        });
+    }
+    </script>
+    <script src="https://cdn.korzh.com/metroui/v4.5.1/js/metro.min.js"></script>
+</body>
