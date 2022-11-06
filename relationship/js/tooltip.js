@@ -1,14 +1,16 @@
 function getPointTooltipHtml(data) {
     return `
         <div>
+            <p><span style='color:grey'>Upload speed (Mbits/sec): </span>${data["Upload speed (Mbits/sec)"]}</p>
+            <p><span style='color:grey'>Download speed (MBits/sec): </span>${data["Download speed (MBits/sec)"]}</p>
+            <p><span style='color:grey'>Upload throughput (MBytes): </span>${data["Upload throughput (MBytes)"]}</p>
+            <p><span style='color:grey'>Upload size (MBytes): </span>${data["Upload size (MBytes)"]}</p>
+            <p><span style='color:grey'>Download size (MBytes): </span>${data["Download size (MBytes)"]}</p>
+            <p><span style='color:grey'>Response time from CloudflareDNS (ms): </span>${data["Response time from CloudflareDNS (ms)"]}</p>
+            <p><span style='color:grey'>Response time from GoogleDNS (ms): </span>${data["Response time from GoogleDNS (ms)"]}</p>
+            <p><span style='color:grey'>Response time from OptusDNS (ms): </span>${data["Response time from OptusDNS (ms)"]}</p>
+            <p><span style='color:grey'>Response time from EC2DNS (ms): </span>${data["Response time from EC2DNS (ms)"]}</p>
             <p><span style='color:grey'>Speed: </span>${data.speed}</p>
-            <p><span style='color:grey'>Transfer size (Transmit): </span>${data["Transfer size"]}</p>
-            <p><span style='color:grey'>Transfer size (Receive): </span>${data["Transfer size-RX"]}</p>
-            <p><span style='color:grey'>Send data: </span>${data["send_data"]}</p>
-            <p><span style='color:grey'>Responding to Server 1: </span>${data["svr1"]}</p>
-            <p><span style='color:grey'>Responding to Server 2: </span>${data["svr2"]}</p>
-            <p><span style='color:grey'>Responding to Server 3: </span>${data["svr3"]}</p>
-            <p><span style='color:grey'>Responding to Server 4: </span>${data["svr4"]}</p>
         </div>
     `;
 }
