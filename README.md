@@ -38,7 +38,8 @@ After the localhost server is ready, access the visualisations based upon your i
 | 2 | http://localhost:8123/suburb-performance/suburb-performance.html |
 | 3, 4, 5| Either http://localhost:8123/relationship/correlation-per-date.html or http://localhost:8123/relationship/correlation-by-bin.html|
 
-### Method 1. View the visualisation online
+### Method 2. View the visualisation online
+
 | Use case | URL |
 |:--------:|:---:|
 | 1 | https://hd-chuong.github.io/COS40004-5GIOT/single-point-performance/single-point-performance.html |
