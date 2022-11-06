@@ -106,9 +106,8 @@
             .style("font-size", "12px");
 
         // Read the data and compute summary statistics for each specie
-        d3.csv("date_and_weather.csv", function(rawData) {
+        d3.csv("./../data/outputs/date_and_weather.csv", function(rawData) {
             const data = rawData.map(processRow).filter(row => row[performanceAttribute] >= 0);
-            console.log(data);
 
             const dateSet = new Set(data.map(function(row) { return row.Date}));
             const dates = Array.from(dateSet.values());
@@ -116,7 +115,6 @@
             const dateMax = Math.max(...dates);
             
             const dateRange = Array.from(dateSet).sort((a, b) => a - b);
-            console.log(dateRange);
 
             const performanceRange = data.map(function(row) { return row[performanceAttribute]});
             const factorRange = data.map(function(row) {return row[factorAttribute]});
