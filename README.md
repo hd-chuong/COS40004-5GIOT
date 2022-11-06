@@ -35,3 +35,4 @@ After the localhost server is ready, access the visualisations based upon your i
 |:--------:|:---:|
 | 1 | http://localhost:8123/suburb-performance/suburb-performance.html |
 | 2 | http://localhost:8123/suburb-performance/suburb-performance.html |
+| 3, 4, 5| Either http://localhost:8123/relationship/correlation-per-date.html or http://localhost:8123/relationship/correlation-by-bin.html|
